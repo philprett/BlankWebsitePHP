@@ -30,6 +30,22 @@ abstract class DBEntity {
     public abstract static function FromDbObject($dbObject);
 
     /**
+     * Check if a table exists in the database
+     */
+    public static function CheckIfTableExists() {
+
+        global $DB;
+
+        $tableName = static::GetTableName();
+        if (!$DB->TableExists($tableName)) {
+            echo "The table ".static::GetTableName()." does not exist.<br>";
+            echo "Please run the <a href='/admin/db/create'>database creator</a>.";
+            exit();
+        }
+
+    }
+
+    /**
      * Get multiple data entites from the database
      * @param string $where The WHERE part of the SQL statement
      * @param array $whereArgs The arguments for the WHERE part of the SQL statement

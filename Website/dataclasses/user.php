@@ -8,7 +8,7 @@ class User extends DBEntity {
     protected static function GetTableName() { return "users"; }
     protected static function GetFields() {
         return array(
-            "user_id        VARCHAR(40) NOT NULL",
+            "user_id        VARCHAR(40)  NOT NULL",
 	        "user_email     VARCHAR(300) NOT NULL",
 	        "user_firstname VARCHAR(300) NOT NULL",
 	        "user_surname   VARCHAR(300) NOT NULL",
