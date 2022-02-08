@@ -1,0 +1,6 @@
+<Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup>
+    <EnvName>PHPDev</EnvName>
+    <AppDesignerFolder>BlankWebsite</AppDesignerFolder>
+  </PropertyGroup>
+</Project>
