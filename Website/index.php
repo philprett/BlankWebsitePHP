@@ -22,6 +22,11 @@ function IncludeDir($path) {
 	}
 }
 
+if (!file_exists("config.php")) {
+    echo "You must create a config.php file.<br><br>There is an example called config.sample.php.";
+	exit();
+}
+
 include "config.php";
 
 IncludeDir("functions");
