@@ -62,7 +62,7 @@ abstract class Page {
 		echo "<head>\n";
 		echo "<meta charset=\"utf-8\" />\n";
 		echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n";
-		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/fonts/fontawesome-free-6.0.0-beta3-web/css/all.min.css\">\n";
+		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/fonts/fontawesome-free-6.0.0-web/css/all.min.css\">\n";
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/css/styles.css\">\n";
 		echo "<link rel=\"icon\" href=\"/favicon.ico\" />\n";
         //echo "<script src=\"/assets/ckeditor/ckeditor.js\"></script>\n";

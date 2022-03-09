@@ -22,6 +22,9 @@ function IncludeDir($path) {
 	}
 }
 
+if (!file_exists("config.php")) {
+	die("Please create the config.php file.");
+}
 include "config.php";
 
 IncludeDir("functions");
