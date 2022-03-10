@@ -4,7 +4,11 @@ class LoginPage extends Page {
 
 	public function PrepareData() {
 
+		global $DB;
+
 		$this->incorrectLoginDetails = false;
+
+		$this->existingUsers = User_GetExistingUserCount();
 
 	}
 
@@ -50,6 +54,8 @@ class LoginPage extends Page {
 
 	public function PreparePage() {
 
+		global $CONFIG;
+
 		if ($this->incorrectLoginDetails) {
             $this->PrepareIncorrectPage();
 			return;
@@ -77,9 +83,11 @@ class LoginPage extends Page {
 		$this->AddBody("<div><span class='LinkButton' onclick=\"location.href = '/user/forgotpassword'\">{forgotpassword}</span></div>");
 		$this->AddBody("</div>");
 
-		$this->AddBody("<div class='Field'>");
-		$this->AddBody("<div><span class='LinkButton' onclick=\"location.href = '/user/createaccount'\">{createaccount}</span></div>");
-		$this->AddBody("</div>");
+		if ($CONFIG["allowuserselfcreation"] == true || $this->existingUsers == 0) {
+			$this->AddBody("<div class='Field'>");
+			$this->AddBody("<div><span class='LinkButton' onclick=\"location.href = '/user/createaccount'\">{createaccount}</span></div>");
+			$this->AddBody("</div>");
+		}
 
 		$this->AddBody("</form>");
 	}

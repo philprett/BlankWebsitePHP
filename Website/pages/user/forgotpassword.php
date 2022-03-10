@@ -6,6 +6,8 @@ class ForgotPasswordPage extends Page {
 
 		$this->ShowMailSent = false;
 
+		$this->existingUsers = User_GetExistingUserCount();
+
 	}
 
 	public function PerformActions() {
@@ -43,6 +45,8 @@ class ForgotPasswordPage extends Page {
 
 	public function PreparePage() {
 
+		global $CONFIG;
+
 		$this->AddBody("<h1>{forgotpassword}</h1>");
 
 		if ($this->ShowMailSent) {
@@ -65,9 +69,11 @@ class ForgotPasswordPage extends Page {
 		$this->AddBody("<div><span class='LinkButton' onclick=\"location.href = '/user/login'\">{login}</span></div>");
 		$this->AddBody("</div>");
 
-		$this->AddBody("<div class='Field'>");
-		$this->AddBody("<div><span class='LinkButton' onclick=\"location.href = '/user/createaccount'\">{createaccount}</span></div>");
-		$this->AddBody("</div>");
+		if ($CONFIG["allowuserselfcreation"] == true || $this->existingUsers == 0) {
+			$this->AddBody("<div class='Field'>");
+			$this->AddBody("<div><span class='LinkButton' onclick=\"location.href = '/user/createaccount'\">{createaccount}</span></div>");
+			$this->AddBody("</div>");
+		}
 
 		$this->AddBody("</form>");
     }

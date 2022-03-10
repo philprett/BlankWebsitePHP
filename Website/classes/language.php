@@ -73,6 +73,20 @@ class Language {
 													"de" => "Willkommen auf der {applicationname} Website {0}."),
 
 
+			"pagenotfound" 				=> 	array(	"en" => "Page not found",
+													"de" => "Seite nicht gefunden"),
+
+			"settings" 					=> 	array(	"en" => "Settings",
+													"de" => "Einstellungen"),
+			"useradmin" 				=> 	array(	"en" => "User Administration",
+													"de" => "Benutzerverwaltung"),
+			"isadmin" 					=> 	array(	"en" => "Is Admin?",
+													"de" => "Ist Admin?"),
+			"actions" 					=> 	array(	"en" => "Actions",
+													"de" => "Aktionen"),
+			"addnewuser" 				=> 	array(	"en" => "Add New User",
+													"de" => "Neue Benutzer hinzufügen"),
+
 			"template" 					=> 	array(	"en" => "Login",
 													"de" => "Anmelden"),
 		);

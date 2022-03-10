@@ -23,3 +23,11 @@ function User_GetFullName($user) {
     return trim($user->user_firstname." ".$user->user_surname);
 
 }
+
+function User_GetExistingUserCount() {
+
+    global $DB;
+
+    return $DB->ExecScalar("SELECT COUNT(*) FROM users");
+
+}

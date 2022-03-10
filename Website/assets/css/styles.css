@@ -9,6 +9,8 @@
 
 	--LinkButtonTextColor: var(--TextColor);
 	--LinkButtonBackgroundColor: #ccc;
+	--LinkButtonHoverTextColor: var(--TextHoverColor);
+	--LinkButtonHoverBackgroundColor: #ddd;
 
 	--InputFieldBorderColor: #ccc;
 
@@ -16,7 +18,7 @@
 	--ErrorBackgroundColor: #f00;
 }
 
-body {
+body, form, input {
 	font-family: var(--FontFamily);
 	font-size: var(--FontSize);
 	color: var(--TextColor);
@@ -64,6 +66,11 @@ a:hover {
 	padding: 5px 10px;
 	cursor: pointer;
 	line-height: 2em;
+}
+
+.LinkButton:hover {
+	color: var(--LinkButtonHoverTextColor);
+	background-color: var(--LinkButtonHoverBackgroundColor);
 }
 
 .StandardForm {
@@ -118,3 +125,8 @@ a:hover {
 			border-radius: 5px;
 		}
 
+.DynamicInputField {
+	padding: 5px 10px;
+	border: 1px solid #fff;
+	border-radius: 5px;
+}

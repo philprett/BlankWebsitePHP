@@ -27,6 +27,10 @@ abstract class Page {
 
 		$text = $body;
 		$s = strpos($text, "{");
+		while ($s !== false && strpos($text, "{{") === $s) {
+			$text = substr($text, 0, $s) . substr($text,$s+1);
+			$s = strpos($text, "{", $s+1);
+		}
 		while ($s !== false) {
             $e = strpos($text, "}", $s);
 			if ($e === false) {
@@ -41,7 +45,10 @@ abstract class Page {
 
 				$text = $before.$lang.$after;
 				$s = strpos($text, "{", $s);
-            }
+				while ($s !== false && strpos($text, "{{", $s) === $s) {
+					$s = strpos($text, "{", $s+2);
+				}
+			}
         }
 
 		$this->body .= $text;
@@ -75,14 +82,14 @@ abstract class Page {
 		echo $applicationName;
 		echo "</div>\n";
 		echo "<div class='Menu'>\n";
-		echo "		<a href='/'><i class='fas fa-home'></i> ".$LANG->Get("homepage")."</a>\n";
+		echo "		<a href='/'>".Icons::$Home." ".$LANG->Get("homepage")."</a>\n";
 		if ($USER) {
 			if ($USER->user_admin) {
-				echo "		<a href='/user/profile'><i class='fa-solid fa-users'></i> Users</a>\n";
+				echo "		<a href='/admin'>".Icons::$Settings." ".$LANG->Get("Settings")."</a>\n";
 			}
-			echo "		<a href='/user/profile'><i class='fas fa-user'></i> ".USER_GetFullName($USER)."</a>\n";
+			echo "		<a href='/user/profile'>".Icons::$User." ".USER_GetFullName($USER)."</a>\n";
 		} else {
-			echo "		<a href='/user/login'><i class='fas fa-user'></i> ".$LANG->Get("login")."</a>";
+			echo "		<a href='/user/login'>".Icons::$User." ".$LANG->Get("login")."</a>";
 		}
 		echo "</div>\n";
 		echo "<div class='Main'>\n";

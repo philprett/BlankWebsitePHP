@@ -7,11 +7,18 @@ class CreateAccountPage extends Page {
 		$this->passwordsDoNotMatch = false;
 		$this->emailAlreadyExists = false;
 
+		$this->existingUsers = User_GetExistingUserCount();
+
 	}
 
 	public function PerformActions() {
 
 		global $CONFIG, $DB;
+
+		if ($CONFIG["allowuserselfcreation"] == false && $this->existingUsers > 0) {
+			header("Location: /user/login");
+			exit();
+		}
 
 		if (isset($_POST["createaccountemail"])) {
 
@@ -35,9 +42,17 @@ class CreateAccountPage extends Page {
 			$passwordHash = EncryptPassword($createaccountpassword1);
 			$cookie = RandomString(128, true, true, true, false);
 
-			$existingUsers = $DB->ExecScalar("SELECT COUNT(*) FROM users");
+			$this->existingUsers = User_GetExistingUserCount();
 
-			$user = new Data_User(CreateGuid(), $createaccountemail, $createaccountfirstname, $createaccountsurname, $passwordHash, "", $cookie, $existingUsers == 0);
+			$user = new Data_User(
+				CreateGuid(), 
+				$createaccountemail,
+				$createaccountfirstname, 
+				$createaccountsurname, 
+				$passwordHash, 
+				"", 
+				$cookie, 
+				$this->existingUsers == 0);
 			$user->Save();
 
             header("Location: /user/login");

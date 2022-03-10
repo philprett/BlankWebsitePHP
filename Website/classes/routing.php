@@ -15,7 +15,8 @@
 			else if ($url == "/user/profile") $page = new ProfilePage();
 			else if ($url == "/user/createaccount") $page = new CreateAccountPage();
 			else if ($url == "/user/forgotpassword") $page = new ForgotPasswordPage();
-			else if ($url == "/admin/db/create") $page = new AdminDbCreate();
+			else if ($url == "/admin/users") $page = new AdminUsersPage();
+			else if ($url == "/admin") $page = new AdminPage();
 
 			if ($page) {
 				$page->Show();

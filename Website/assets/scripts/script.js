@@ -191,3 +191,64 @@ window.addEventListener("load", function () {
 		}
 	});
 });
+
+function ajaxPost(url, postData, callbackSuccess, callbackFailure) {
+
+	xmlHttp=null; try { xmlHttp=new XMLHttpRequest(); }	catch (e) {	try { xmlHttp=new ActiveXObject('Msxml2.XMLHTTP'); } catch (e) { xmlHttp=new ActiveXObject('Microsoft.XMLHTTP'); } }
+	if ( xmlHttp == null ) return;
+
+	xmlHttp.open('POST',url,true);
+	xmlHttp.setRequestHeader('Content-type','application/x-www-form-urlencoded;charset=UTF-8;');
+	xmlHttp.setRequestHeader('Content-length',postData.length);
+	xmlHttp.onreadystatechange=
+		function () {
+			if (xmlHttp.readyState==4) {
+				var statusNo=xmlHttp.status;
+				var statusTxt=xmlHttp.statusText;
+				var ret=xmlHttp.responseText;
+				if ( statusNo != 200 ) {
+					if (callbackFailure) callbackFailure(statusNo, ret);
+				} else {
+					if (callbackSuccess) callbackSuccess(statusNo, ret);
+				}
+			}
+		}
+	xmlHttp.send(postData);	
+
+}
+
+function AjaxUpdate(element, id, value) {
+
+	var postData = "ajaxupdateid="+id+"&ajaxfield="+element.name+"&ajaxvalue="+encodeURI(value);
+
+	element.enabled = false;
+	ajaxPost(
+		location.href, 
+		postData, 
+		function (statusNo, ret) {
+			element.enabled = true;
+		},
+		function (statusNo, ret) {
+			alert(ret);
+			element.enabled = true;
+		});
+
+}
+
+function AjaxDelete(element, id) {
+
+	var postData = "ajaxdeleteid="+id;
+
+	element.enabled = false;
+	ajaxPost(
+		location.href, 
+		postData, 
+		function (statusNo, ret) {
+			location.href = location.href;
+		},
+		function (statusNo, ret) {
+			alert(ret);
+		});
+
+}
+

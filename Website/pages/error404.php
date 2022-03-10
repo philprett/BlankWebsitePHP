@@ -12,7 +12,7 @@ class Error404Page extends Page {
 
 	public function PreparePage() {
 		global $LANG;
-		$this->AddBody("<h1>".$LANG->Get("NotFound")."</h1>");
+		$this->AddBody("<h1>".$LANG->Get("pagenotfound")."</h1>");
 	}
 
 }
