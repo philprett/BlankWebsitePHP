@@ -31,7 +31,7 @@ IncludeDir("functions");
 IncludeDir("classes");
 IncludeDir("pages");
 
-$LANG = new Language("de");
+$LANG = new Language("en");
 
 $DB = new DB(
 	$CONFIG["dbhost"],
@@ -39,11 +39,15 @@ $DB = new DB(
 	$CONFIG["dbpassword"],
 	$CONFIG["dbdatabase"]);
 
+if ($DB->TableExists("users") == false) {
+	echo "Users table not found.<br>";
+	echo "Please use the <a href=/dbcreate.php>Database Creator</a>.";
+	exit();
+}
+
 IncludeDir("dataclasses");
 
-User::CheckIfTableExists();
-
 $cookieValue = isset($_COOKIE[$CONFIG["cookiename"]]) ? $_COOKIE[$CONFIG["cookiename"]] : RandomString(32);
-$USER = User::GetByCookie($cookieValue);
+$USER = User_GetByCookie($cookieValue);
 
 Routing::Route();

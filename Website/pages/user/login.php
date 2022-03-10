@@ -17,7 +17,7 @@ class LoginPage extends Page {
 			$email = $_POST["loginemail"];
 			$password = $_POST["loginpassword"];
 
-			$user = User::GetFirst(
+			$user = Data_User::GetFirst(
 				"user_email = ?",
 				array($email));
 			if ($user === false) {

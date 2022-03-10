@@ -11,7 +11,7 @@ class CreateAccountPage extends Page {
 
 	public function PerformActions() {
 
-		global $CONFIG;
+		global $CONFIG, $DB;
 
 		if (isset($_POST["createaccountemail"])) {
 
@@ -26,7 +26,7 @@ class CreateAccountPage extends Page {
 				return;
             }
 
-            $existingUser = User::GetFirst("user_email = ?", array($createaccountemail));
+            $existingUser = Data_User::GetFirst("user_email = ?", array($createaccountemail));
             if ($existingUser) {
                 $this->emailAlreadyExists = true;
                 return;
@@ -34,7 +34,10 @@ class CreateAccountPage extends Page {
 
 			$passwordHash = EncryptPassword($createaccountpassword1);
 			$cookie = RandomString(128, true, true, true, false);
-			$user = new User(CreateGuid(), $createaccountemail, $createaccountfirstname, $createaccountsurname, $passwordHash, "", $cookie);
+
+			$existingUsers = $DB->ExecScalar("SELECT COUNT(*) FROM users");
+
+			$user = new Data_User(CreateGuid(), $createaccountemail, $createaccountfirstname, $createaccountsurname, $passwordHash, "", $cookie, $existingUsers == 0);
 			$user->Save();
 
             header("Location: /user/login");

@@ -18,7 +18,7 @@ class ProfilePage extends Page {
         }
 
 		if (isset($_POST["profileemail"])) {
-            $existingUser = User::GetFirst("user_email = ? AND user_id != ?", array($_POST["profileemail"]), $USER->user_id);
+            $existingUser = Data_User::GetFirst("user_email = ? AND user_id != ?", array($_POST["profileemail"], $USER->user_id));
             if ($existingUser) {
                 $this->emailAlreadyExists = true;
                 return;

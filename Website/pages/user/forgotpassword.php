@@ -16,7 +16,7 @@ class ForgotPasswordPage extends Page {
 
 			$this->ShowMailSent = true;
 
-            $existingUser = User::GetFirst("user_email = ?", array($_POST["forgotpasswordemail"]));
+            $existingUser = Data_User::GetFirst("user_email = ?", array($_POST["forgotpasswordemail"]));
             if (!$existingUser) {
                 return;
             }
@@ -32,7 +32,6 @@ class ForgotPasswordPage extends Page {
 				$LANG->Get(
 						"newpasswordemailcontent",
 						trim($existingUser->user_firstname." ".$existingUser->user_surname),
-						$applicationName,
 						$newPassword);
 
 			SendMailHtml($_POST["forgotpasswordemail"], $emailSubject, $emailContent);

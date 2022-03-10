@@ -77,7 +77,10 @@ abstract class Page {
 		echo "<div class='Menu'>\n";
 		echo "		<a href='/'><i class='fas fa-home'></i> ".$LANG->Get("homepage")."</a>\n";
 		if ($USER) {
-			echo "		<a href='/user/profile'><i class='fas fa-user'></i> ".$USER->GetFullName()."</a>\n";
+			if ($USER->user_admin) {
+				echo "		<a href='/user/profile'><i class='fa-solid fa-users'></i> Users</a>\n";
+			}
+			echo "		<a href='/user/profile'><i class='fas fa-user'></i> ".USER_GetFullName($USER)."</a>\n";
 		} else {
 			echo "		<a href='/user/login'><i class='fas fa-user'></i> ".$LANG->Get("login")."</a>";
 		}
